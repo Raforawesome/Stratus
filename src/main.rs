@@ -1,8 +1,12 @@
 mod macros;
 mod components;
 use dioxus::{ prelude::*, desktop::use_window };
+use components::{
+	MainScreen
+};
 
-struct AppProps {
+#[derive(PartialEq, Eq, Props)]
+pub struct AppProps {
     screen: &'static str
 }
 
@@ -25,7 +29,9 @@ fn app(cx: Scope<AppProps>) -> Element {
     cx.render(rsx!(
 		style { [include_str!("./css/global.css")] }
 		match cx.props.screen {
-			"main" => main_screen_component!(),
+			"main" => cx.render(rsx!(
+				MainScreen { screen: cx.props.screen }
+			)),
 			_ => {
 				eprintln!("Invalid screen!");
 				std::process::exit(1);
