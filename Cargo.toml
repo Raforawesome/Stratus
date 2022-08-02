@@ -7,6 +7,7 @@ description = "An app to assist people in taking care of their mental health."
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+base64 = { version = "0.13.0", features = ["alloc"] }
 dioxus = { version = "0.2.4", features = ["desktop"] }
 
 [package.metadata.bundle]
