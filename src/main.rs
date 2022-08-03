@@ -15,16 +15,16 @@ fn main() {
         app,
         AppProps { screen: "main" },
         |c| {
-            c.with_disable_context_menu(true)
+            c.with_disable_context_menu(true);
+            c.with_window(|w| {
+                w.with_resizable(false)
+                    .with_title("Stratus")
+            })
         }
     );
 }
 
 fn app(cx: Scope<AppProps>) -> Element {
-	// Window setup
-	let window_handle = use_window(&cx);
-	window_handle.set_resizable(false);
-
 	// Actual rendering
     cx.render(rsx!(
 		style { [include_str!("./css/global.css")] }
