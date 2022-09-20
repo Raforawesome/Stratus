@@ -32,7 +32,8 @@ button {
 	width: 25vh;
 	font-weight: 600;
 	font-size: 1.1rem;
-	padding-bottom: 1vh;
+	/* padding-bottom: 1vh; */
+	vertical-align: middle;
 	text-shadow: 1px 1px 8px #ffffff65;
 	box-shadow: 1px 1px 10px #00000044;
 }
