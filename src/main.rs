@@ -1,14 +1,24 @@
+#![feature(once_cell)]
 mod macros;
 mod components;
-use dioxus::{ prelude::*, desktop::use_window };
+mod functions;
+use dioxus::prelude::*;
+use std::sync::{ LazyLock, Mutex };
 use components::{
-	MainScreen
+	MainScreen,
+	Dashboard
 };
+
 
 #[derive(PartialEq, Eq, Props)]
 pub struct AppProps {
     screen: &'static str
 }
+
+pub static SCREEN: LazyLock<Mutex<&'static str>> = LazyLock::new(|| {
+    Mutex::new("main")
+});
+
 
 fn main() {
     dioxus::desktop::launch_with_props(
@@ -25,17 +35,12 @@ fn main() {
 }
 
 fn app(cx: Scope<AppProps>) -> Element {
-	// Actual rendering
+    // Actual rendering
     cx.render(rsx!(
-		style { [include_str!("./css/global.css")] }
-		match cx.props.screen {
-			"main" => cx.render(rsx!(
-				MainScreen { screen: cx.props.screen }
-			)),
-			_ => {
-				eprintln!("Invalid screen!");
-				std::process::exit(1);
-			}
-		}
+        style { [include_str!("./css/global.css")] }
+        Router {
+            Route { to: "/home", MainScreen {} }
+            Route { to: "/dash" Dashboard {} }
+        }
     ))
 }
