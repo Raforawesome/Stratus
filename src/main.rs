@@ -11,16 +11,9 @@ use components::{
 };
 
 
-#[derive(PartialEq, Eq, Props)]
-pub struct AppProps {
-    screen: &'static str
-}
-
-
 fn main() {
-    dioxus::desktop::launch_with_props(
+    dioxus::desktop::launch_cfg(
         app,
-        AppProps { screen: "main" },
         |c| {
             c.with_disable_context_menu(true);
             c.with_window(|w| {
@@ -31,7 +24,7 @@ fn main() {
     );
 }
 
-fn app(cx: Scope<AppProps>) -> Element {
+fn app(cx: Scope) -> Element {
     // Actual rendering
     cx.render(rsx!(
         style { [include_str!("./css/global.css")] }

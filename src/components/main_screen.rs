@@ -16,7 +16,6 @@ pub fn MainScreen(cx: Scope) -> Element {
 		input {
 			oninput: |event| {
 				password_input.set(event.value.clone());
-				println!("new password input: {}", password_input.get());
 			},
 			"type": "password",
 			style: "margin-top:15vh;",
@@ -25,8 +24,7 @@ pub fn MainScreen(cx: Scope) -> Element {
 		}
 		button {
 			onclick: move |_| {
-				println!("Log in button clicked");
-				if login::try_login("e", "e") {
+				if login::try_login(password_input.get()) {
 				    println!("Successful login");
 					let router = use_router(&cx);
 					router.replace_route("/dash", None, None);
