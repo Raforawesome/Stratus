@@ -11,7 +11,7 @@ input {
 	border-width: 1px; */
 	border: none;
 	background-color: rgb(230, 230, 230);
-	height: 5vh;
+	height: 6vh;
 	padding-left: 2vw;
 }
 input:focus {

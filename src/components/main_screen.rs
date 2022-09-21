@@ -10,8 +10,8 @@ pub fn MainScreen(cx: Scope) -> Element {
 			height: "100px",
 			class: "logo"
 		}
-		input { style: "margin-top:12vh;", placeholder: "Username", id: "username" }
-		input { "type": "password", style: "margin-top:3vh;", placeholder: "Password", id: "password" }
+		// input { style: "margin-top:12vh;", placeholder: "Username", id: "username" }
+		input { "type": "password", style: "margin-top:15vh;", placeholder: "Password", id: "password" }
 		button {
 			onclick: move |_| {
 				println!("Log in button clicked");
@@ -24,7 +24,7 @@ pub fn MainScreen(cx: Scope) -> Element {
 				    // Include error shake & message here
 				}
 			},
-			"Log In"
+			"Unlock"
 		}
 	))
 }
