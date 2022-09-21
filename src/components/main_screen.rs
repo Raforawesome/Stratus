@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 use dioxus::prelude::*;
-use crate::{ include_png, functions::login, SCREEN };
+use crate::{ include_png, functions::login };
 
 pub fn MainScreen(cx: Scope) -> Element {
 	cx.render(rsx!(
@@ -17,7 +17,8 @@ pub fn MainScreen(cx: Scope) -> Element {
 				println!("Log in button clicked");
 				if login::try_login("e", "e") {
 				    println!("Successful login");
-				    *SCREEN.lock().unwrap() = "dash";
+					let router = use_router(&cx);
+					router.replace_route("/dash", None, None);
 				} else {
 				    println!("Unsuccessful login");
 				    // Include error shake & message here
