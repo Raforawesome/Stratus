@@ -9,6 +9,7 @@ description = "An app to assist people in taking care of their mental health."
 [dependencies]
 base64 = { version = "0.13.0", features = ["alloc"] }
 dioxus = { version = "0.2.4", features = ["desktop", "router"] }
+dirs = "4.0.0"
 libpasta = "0.1.2"
 
 [package.metadata.bundle]
