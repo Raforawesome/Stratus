@@ -3,7 +3,7 @@
 mod components;
 mod functions;
 mod macros;
-use components::{Dashboard, ErrorScreen, MainScreen};
+use components::{Dashboard, ErrorScreen, LoginScreen};
 use dioxus::prelude::*;
 
 fn main() {
@@ -18,7 +18,7 @@ fn app(cx: Scope) -> Element {
     cx.render(rsx!(
         style { [include_str!("./css/global.css")] }
         Router {
-            Route { to: "/", MainScreen {} }
+            Route { to: "/", LoginScreen {} }
             Route { to: "/dash", Dashboard {} }
             Route { to: "", ErrorScreen {} }
         }

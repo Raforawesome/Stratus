@@ -2,7 +2,7 @@
 use crate::{functions::login, include_png};
 use dioxus::prelude::*;
 
-pub fn MainScreen(cx: Scope) -> Element {
+pub fn LoginScreen(cx: Scope) -> Element {
     let password_input = use_state(&cx, || "".to_string());
 
     cx.render(rsx!(
