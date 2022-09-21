@@ -14,8 +14,8 @@ pub fn MainScreen(cx: Scope) -> Element {
 		}
 		// input { style: "margin-top:12vh;", placeholder: "Username", id: "username" }
 		input {
-			oninput: |txt| {
-				password_input.set(txt.value.clone());
+			oninput: |event| {
+				password_input.set(event.value.clone());
 				println!("new password input: {}", password_input.get());
 			},
 			"type": "password",
