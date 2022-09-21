@@ -3,6 +3,8 @@ use dioxus::prelude::*;
 use crate::{ include_png, functions::login };
 
 pub fn MainScreen(cx: Scope) -> Element {
+	let password_input = use_state(&cx, || "".to_string());
+	
 	cx.render(rsx!(
 		style { [include_str!("../css/main_screen.css")] }
 		img { 
@@ -11,7 +13,16 @@ pub fn MainScreen(cx: Scope) -> Element {
 			class: "logo"
 		}
 		// input { style: "margin-top:12vh;", placeholder: "Username", id: "username" }
-		input { "type": "password", style: "margin-top:15vh;", placeholder: "Password", id: "password" }
+		input {
+			oninput: |txt| {
+				password_input.set(txt.value.clone());
+				println!("new password input: {}", password_input.get());
+			},
+			"type": "password",
+			style: "margin-top:15vh;",
+			placeholder: "Password",
+			id: "password"
+		}
 		button {
 			onclick: move |_| {
 				println!("Log in button clicked");
