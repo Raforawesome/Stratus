@@ -1,12 +1,13 @@
 #![feature(once_cell)]
+#![allow(unused)]
 mod macros;
 mod components;
 mod functions;
 use dioxus::prelude::*;
-use std::sync::{ LazyLock, Mutex };
 use components::{
 	MainScreen,
-	Dashboard
+	Dashboard,
+	ErrorScreen
 };
 
 
@@ -14,10 +15,6 @@ use components::{
 pub struct AppProps {
     screen: &'static str
 }
-
-pub static SCREEN: LazyLock<Mutex<&'static str>> = LazyLock::new(|| {
-    Mutex::new("main")
-});
 
 
 fn main() {
@@ -39,8 +36,9 @@ fn app(cx: Scope<AppProps>) -> Element {
     cx.render(rsx!(
         style { [include_str!("./css/global.css")] }
         Router {
-            Route { to: "/home", MainScreen {} }
-            Route { to: "/dash" Dashboard {} }
+            Route { to: "/", MainScreen {} }
+            Route { to: "/dash", Dashboard {} }
+            Route { to: "", ErrorScreen {} }
         }
     ))
 }
