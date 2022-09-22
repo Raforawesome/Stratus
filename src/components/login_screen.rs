@@ -6,7 +6,7 @@ pub fn LoginScreen(cx: Scope) -> Element {
     let password_input = use_state(&cx, || "".to_string());
 
     cx.render(rsx!(
-        style { [include_str!("../css/main_screen.css")] }
+        style { [include_str!("../css/login_screen.css")] }
         img {
             src: include_png!("../assets/images/logo-full.png"),
             height: "100px",
