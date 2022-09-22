@@ -7,7 +7,7 @@ pub fn get_data_dir() -> PathBuf {
         std::process::exit(1);
     });
     home_dir = home_dir.join(".stratus").join("data");
-    let _ = std::fs::create_dir_all(&home_dir).unwrap_or_else(|_| {
+    std::fs::create_dir_all(&home_dir).unwrap_or_else(|_| {
         eprintln!(
             "Error in creating directory. Double check write permissions in your home directory?"
         );
@@ -18,6 +18,17 @@ pub fn get_data_dir() -> PathBuf {
 
 pub fn is_registered() -> bool {
     get_data_dir().join(".hp").exists()
+}
+
+pub fn register(name: &str, password: &str) -> Result<(), std::io::Error> {
+	let dir: PathBuf = get_data_dir();
+	let hashed_pass: String = libpasta::hash_password(password);
+	let mut contents: String = String::new();
+	contents += name;
+	contents += "\n";
+	contents += &hashed_pass;
+	std::fs::write(&dir.join(".hp"), contents.as_bytes())?;
+	Ok(())
 }
 
 pub fn try_login(password: &str) -> bool {
