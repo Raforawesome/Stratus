@@ -32,5 +32,12 @@ pub fn register(name: &str, password: &str) -> Result<(), std::io::Error> {
 }
 
 pub fn try_login(password: &str) -> bool {
-    true
+	let dir: PathBuf = get_data_dir();
+	let contents: String = std::fs::read_to_string(dir.join(".hp")).unwrap_or_else(|_| {
+		eprintln!("Error: Failed to read config file. Check read perms in home directory?");
+		std::process::exit(1);
+	});
+	let decoded: Vec<&str> = contents.lines().collect::<Vec<&str>>();
+	assert_eq!(contents.len(), 2, "Error: Credential file corrupted!");
+	libpasta::hash_password(password) == decoded[1]
 }
