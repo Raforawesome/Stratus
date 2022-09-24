@@ -16,9 +16,7 @@ pub fn get_data_dir() -> PathBuf {
     home_dir
 }
 
-pub fn is_registered() -> bool {
-    get_data_dir().join(".hp").exists()
-}
+pub fn is_registered() -> bool { get_data_dir().join(".hp").exists() }
 
 pub fn register(name: &str, password: &str) -> Result<(), std::io::Error> {
 	let dir: PathBuf = get_data_dir();
