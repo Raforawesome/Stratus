@@ -3,13 +3,19 @@
 mod components;
 mod functions;
 mod macros;
+
 use components::{Dashboard, ErrorScreen, LoginScreen, RegisterScreen};
+use dioxus::desktop::tao::dpi::LogicalSize;
 use dioxus::prelude::*;
 
 fn main() {
     dioxus::desktop::launch_cfg(app, |c| {
         c.with_disable_context_menu(true);
-        c.with_window(|w| w.with_resizable(false).with_title("Stratus"))
+        c.with_window(|w| {
+            w.with_resizable(false)
+                .with_title("Stratus")
+                .with_inner_size(LogicalSize::new(1000, 720))
+        })
     });
 }
 
