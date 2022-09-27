@@ -43,3 +43,9 @@ button:hover {
 button:active {
 	background-color: rgb(36, 36, 36);
 }
+
+.error-text {
+	color: #d90000;
+	text-align: center;
+	margin-top: 5vh;
+}
