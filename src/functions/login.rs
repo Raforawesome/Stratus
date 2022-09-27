@@ -1,5 +1,8 @@
 #![allow(dead_code)]
 use std::path::PathBuf;
+use std::sync::{LazyLock, RwLock};
+
+pub static NAME: LazyLock<RwLock<String>> = LazyLock::new(|| RwLock::new(String::new()));
 
 pub fn get_data_dir() -> PathBuf {
     let mut home_dir = dirs::home_dir().unwrap_or_else(|| {
@@ -39,5 +42,15 @@ pub fn try_login(password: &str) -> bool {
     });
     let decoded: Vec<&str> = contents.lines().collect::<Vec<&str>>();
     assert_eq!(decoded.len(), 2, "Error: Credential file corrupted!");
+    *NAME.write().unwrap() = decoded[0].to_string();
     libpasta::verify_password(decoded[1], password)
+}
+
+pub fn get_name() -> String {
+    NAME.read()
+        .unwrap_or_else(|_| {
+            eprintln!("Error in accessing static memory!");
+            std::process::exit(1);
+        })
+        .clone()
 }
