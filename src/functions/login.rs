@@ -39,5 +39,5 @@ pub fn try_login(password: &str) -> bool {
     });
     let decoded: Vec<&str> = contents.lines().collect::<Vec<&str>>();
     assert_eq!(decoded.len(), 2, "Error: Credential file corrupted!");
-    libpasta::hash_password(password) == decoded[1]
+    libpasta::verify_password(decoded[1], password)
 }
