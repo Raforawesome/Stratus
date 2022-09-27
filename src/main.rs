@@ -20,7 +20,7 @@ fn app(cx: Scope) -> Element {
         Router {
             Route { to: "/", RegisterScreen {} }
             Route { to: "/dash", Dashboard {} }
-			Route { to: "/login", LoginScreen {} }
+            Route { to: "/login", LoginScreen {} }
             Route { to: "", ErrorScreen {} }
         }
     ))
